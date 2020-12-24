@@ -1,5 +1,5 @@
 import re
-
+import sys
 
 def tolower_onlyletters(text):
     text = text.lower()
@@ -8,26 +8,15 @@ def tolower_onlyletters(text):
     return reg.sub('', text)
 
 
-def get_text():
-    text = ""
-    while True:
-        try:
-            x = input()
-            if x:
-                text += x
-        except:
-            break
-
-    return text
-
 def input_text(file):
     if file is None:
-        text = get_text()
+        text = sys.stdin.read()
     else:
-        file = open(file, 'r')
-        text = file.read()
+        with open(file, 'r') as file:
+            text = file.read()
 
     return text	
+
 
 def print_text(text, file):
     if text is None:
@@ -36,5 +25,5 @@ def print_text(text, file):
     if file is None:
         print(text)
     else:
-        file = open(file, 'w')
-        file.write(text)
+        with open(file, 'w') as file:
+            file.write(text)
